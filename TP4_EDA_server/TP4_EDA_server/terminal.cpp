@@ -3,39 +3,39 @@
 
 void print_terminal(int id, const char * msg)
 {
-		switch (id)
-		{
-		case EVENT_IN:
-			move(7, 40);
-			color_set(2, NULL);
-			printw(": %s", msg);
-			color_set(3, NULL);
-			break;
-		case LAST_EVENT:
-			move(8, 40);
-			color_set(2, NULL);
-			printw(": %s", msg);
-			color_set(3, NULL);
-			break;
-		case ACTION:
-			move(9, 40);
-			color_set(2, NULL);
-			printw(": %s", msg);
-			color_set(3, NULL);
-			break;
-		case STATE :
-			color_set(2, NULL);
-			move(10, 40);
-			printw(": %s", msg);
-			color_set(3, NULL);
-			break;
-		default:;
-		}
-	
+	switch (id)
+	{
+	case EVENT_IN:
+		move(7, 40);
+		color_set(1, NULL);
+		printw(": %s", msg);
+		color_set(3, NULL);
+		break;
+	case LAST_EVENT:
+		move(8, 40);
+		color_set(1, NULL);
+		printw(": %s", msg);
+		color_set(3, NULL);
+		break;
+	case ACTION:
+		move(9, 40);
+		color_set(1, NULL);
+		printw(": %s", msg);
+		color_set(3, NULL);
+		break;
+	case STATE:
+		color_set(1, NULL);
+		move(10, 40);
+		printw(": %s", msg);
+		color_set(3, NULL);
+		break;
+	default:;
+	}
+
 }
 void print_menu(void)
 {
-	printw("Programa de simulacion de cliente de Worms");
+	printw("Programa de simulacion de Servidor de Worms");
 	move(2, 0);
 	printw("Cuando el usuario presione las teclas de Eventos de abajo el simulador \nEntiende que se genero un nuevo evento y responde ante el \nRealizando una accion y cambiando el estado");
 	move(4, 0);
@@ -83,18 +83,10 @@ void init_color(void)
 
 }
 
-void print_no_key()
-{
-	color_set(2, NULL);
-	move(10, 80);
-	printw("TECLA NO RECONOCIDA");
-	color_set(3, NULL);
-
-}
 void  print_last_ev(void * data)
 {
 	move(8, 40);
-	color_set(2, NULL);
+	color_set(1, NULL);
 	switch (((data_t*)data)->last_ev)
 	{
 	case MOVE:
@@ -121,7 +113,7 @@ void  print_last_ev(void * data)
 void  print_ev(void * data)
 {
 	move(7, 40);
-	color_set(2, NULL);
+	color_set(1, NULL);
 	switch (((data_t*)data)->ev)
 	{
 	case MOVE:

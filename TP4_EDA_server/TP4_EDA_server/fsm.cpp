@@ -9,7 +9,7 @@ void fsm::run(int ev, void* userData)
 }
 fsm::fsm()
 {
-	estado = WAITNG_IMR;
+	estado = INIT;
 }
 
 
@@ -17,10 +17,16 @@ void print_t1(void* userData)
 {
 	print_last_ev(userData);
 	print_ev(userData);
-	print_terminal(ACTION, "Timeout 1, resubiendo datos   ");
+	print_terminal(ACTION, "Timeout 1,Resending pckg      ");
 	print_terminal(STATE, "Waiting ack                    ");
 }
-
+void print_t1_imr(void* userData)
+{
+	print_last_ev(userData);
+	print_ev(userData);
+	print_terminal(ACTION, "Timeout 1, resubiendo datos   ");
+	print_terminal(STATE, "Waiting I am ready                    ");
+}
 void print_error(void* userData)
 {
 	print_ev(userData);
@@ -28,14 +34,7 @@ void print_error(void* userData)
 	print_terminal(STATE, "Shuting down                   ");
 
 }
-void print_resend(void* userData)
-{
-	print_ev(userData);
-	print_last_ev(userData);
-	print_terminal(ACTION, "Resending info                ");
-	print_terminal(STATE, "Shuting down                   ");
 
-}
 
 void print_quit(void* userData)
 {
@@ -80,5 +79,11 @@ void print_out(void* userData)
 	print_terminal(ACTION, "                           ");
 	print_terminal(STATE, "Conection closed            ");
 }
-
+void print_imr(void* userData)
+{
+	
+	print_terminal(ACTION, "I am ready sent               ");
+	print_terminal(STATE, "Waiting I am ready             ");
+	print_ev(userData);
+}
 void nothing(void* userData){}

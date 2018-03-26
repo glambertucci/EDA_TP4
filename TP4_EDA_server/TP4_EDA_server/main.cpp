@@ -12,14 +12,15 @@ int main(void)
 	noecho();
 	immedok(winTest, TRUE);
 	data_t user;
-	data_t  * puser=&user;
+	data_t  * puser = &user;
 	puser->ev = I_AM_READY;
 	init_color();
 	color_set(3, NULL);
 	print_menu();
 	fsm s;
 	int i;
-	print_terminal(STATE, "Waiting I am ready.");
+	print_terminal(STATE, "Send Ready please.");
+
 	do
 	{
 		i = getch();
@@ -27,7 +28,7 @@ int main(void)
 		{
 			if (toupper(i) >= 'A' && toupper(i) <= 'G')
 			{
-				s.run(toupper(i)-'A', (void *) puser);
+				s.run(toupper(i) - 'A', (void *)puser);
 			}
 		}
 
