@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include "terminal.h"
 typedef enum {WAITNG_IMR, WAITING_EVENT, WAITING_ACK, SHUTING_DOWN };//testado
-
+#define EVENTS_N 7
+#define STATES_N 4
  typedef void(*pfun)(void* userData);
  void print_error(void* userData);
  void print_resend(void* userData);
@@ -27,7 +28,7 @@ class fsm
 {
 	
 	private:
-		const cell tabla[4][7] =
+		const cell tabla[STATES_N][EVENTS_N] =
 		{//			MOVE					          I_AM_READY						TIMEOUT				 TIMEOUT_2					          	 ACK						  QUIT							   ERROR
 		{ { SHUTING_DOWN, &print_error },{ WAITING_ACK , &print_ack_r } ,{ SHUTING_DOWN, &print_error },{ SHUTING_DOWN, &print_error },	{ SHUTING_DOWN, &print_error } ,{ SHUTING_DOWN, &print_quit } ,{ SHUTING_DOWN ,&print_error }},	//init
 		{ { WAITING_ACK , &print_move } ,{ SHUTING_DOWN ,&print_error }	,{ SHUTING_DOWN, &print_error },{ SHUTING_DOWN ,&print_error },	{ WAITING_EVENT, &print_ack }  ,{ SHUTING_DOWN ,&print_quit } ,{ SHUTING_DOWN ,&print_error }},	//wait ev
