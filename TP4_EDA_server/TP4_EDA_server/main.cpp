@@ -1,3 +1,12 @@
+
+/*
+	TP4 eda FSM
+	Alumnos:
+	Lambertucci Guido 58009
+	Hrubisiuk Agustin  58311
+	Carricart Francisco 
+*/
+
 #include "terminal.h"
 #include "fsm.h"
 #include <curses.h>

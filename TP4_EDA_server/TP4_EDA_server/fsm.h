@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "terminal.h"
 typedef enum { INIT,WAITING_RD, WAITING_EVENT, WAITING_ACK, SHUTING_DOWN };//testado
+typedef enum { MOVE, I_AM_READY, TIMEOUT, TIMEOUT_2, ACK, QUIT, ERROR };//tevento
+enum { EVENT_IN, LAST_EVENT, ACTION, STATE };
 
 typedef void(*pfun)(void* userData);
 
@@ -21,6 +23,7 @@ typedef struct
 {
 	int proximoEstado;
 	pfun action;
+	
 }cell;
 
 

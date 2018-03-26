@@ -3,19 +3,10 @@
 #include <stdlib.h>
 #include "terminal.h"
 typedef enum {WAITNG_IMR, WAITING_EVENT, WAITING_ACK, SHUTING_DOWN };//testado
+typedef enum { MOVE, I_AM_READY, TIMEOUT, TIMEOUT_2, ACK, QUIT, ERROR };//tevento
+enum { EVENT_IN, LAST_EVENT, ACTION, STATE };
 
- typedef void(*pfun)(void* userData);
- void print_error(void* userData);
- void print_resend(void* userData);
- void print_quit(void* userData);
- void print_ack(void* userData);
-void print_ack_r(void* userData);
-void print_move(void* userData);
-void print_t1(void* userData);
-void nothing(void* userData);
-void print_out(void* userData);
-void print_ackq(void* userData);
-
+typedef void(*pfun)(void* userData);
 typedef struct 
 {
 	int proximoEstado;

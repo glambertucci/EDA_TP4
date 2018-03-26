@@ -1,6 +1,6 @@
 #include <curses.h>
 #include "terminal.h"
-
+#include "fsm.h"
 void print_terminal(int id, const char * msg)
 {
 		switch (id)
@@ -144,3 +144,90 @@ void  print_ev(void * data)
 	}
 	color_set(3, NULL);
 }
+
+
+
+
+void print_t1(void* userData)
+{
+	print_last_ev(userData);
+	print_ev(userData);
+	print_terminal(ACTION, "Timeout 1, resubiendo datos   ");
+	print_terminal(STATE, "Waiting ack                    ");
+}
+
+void print_error(void* userData)
+{
+	print_ev(userData);
+	print_terminal(ACTION, "Error, cerrando programa      ");
+	print_terminal(STATE, "Shuting down                   ");
+
+}
+void print_resend(void* userData)
+{
+	print_ev(userData);
+	print_last_ev(userData);
+	print_terminal(ACTION, "Resending info                ");
+	print_terminal(STATE, "Shuting down                   ");
+
+}
+
+void print_quit(void* userData)
+{
+	((data_t *)userData)->quit_flag = true;
+	print_ev(userData);
+	print_last_ev(userData);
+	print_terminal(ACTION, "Sending quit                  ");
+	print_terminal(STATE, "Waiting Acknowledge            ");
+
+}
+
+void print_ack_r(void* userData)
+{
+	print_ev(userData);
+	print_terminal(ACTION, "Sending ready                 ");
+	print_terminal(LAST_EVENT, "init");
+	print_terminal(STATE, "Waiting Acknowledge            ");
+
+}
+void print_ack(void* userData)
+{
+	print_ev(userData);
+	print_terminal(ACTION, "Acknowledged                  ");
+	print_terminal(STATE, "Waiting Event                  ");
+	print_last_ev(userData);
+}
+void print_ackq(void* userData)
+{
+	if ((((data_t *)userData)->quit_flag == true))
+	{
+		print_terminal(ACTION, "Acknowledged                  ");
+		print_terminal(STATE, "Shuting down                   ");
+		((data_t *)userData)->quit_flag = false;
+	}
+	else
+	{
+		print_terminal(EVENT_IN, "                           ");
+		print_terminal(LAST_EVENT, "                           ");
+		print_terminal(ACTION, "                           ");
+		print_terminal(STATE, "Conection closed            ");
+	}
+
+
+}
+void print_move(void* userData)
+{
+	print_last_ev(userData);
+	print_terminal(ACTION, "Moving                        ");
+	print_terminal(STATE, "Waiting Acknowledge            ");
+	print_ev(userData);
+}
+void print_out(void* userData)
+{
+	print_terminal(EVENT_IN, "                           ");
+	print_terminal(LAST_EVENT, "                           ");
+	print_terminal(ACTION, "                           ");
+	print_terminal(STATE, "Conection closed            ");
+}
+
+void nothing(void* userData) {}
