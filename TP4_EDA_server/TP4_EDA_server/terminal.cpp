@@ -1,6 +1,6 @@
 #include <curses.h>
 #include "terminal.h"
-
+#include "fsm.h"
 void print_terminal(int id, const char * msg)
 {
 	switch (id)

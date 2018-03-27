@@ -186,7 +186,7 @@ void print_ack_r(void* userData)
 {
 	print_ev(userData);
 	print_terminal(ACTION, "Sending ready                 ");
-	print_terminal(LAST_EVENT, "init");
+	print_terminal(LAST_EVENT, "I am ready");
 	print_terminal(STATE, "Waiting Acknowledge            ");
 
 }
